@@ -104,7 +104,8 @@ class _SingleImageScreenState extends State<SingleImageScreen> {
             const SizedBox(width: 20),
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     widget.galleryItem.title ?? 'No Title',
