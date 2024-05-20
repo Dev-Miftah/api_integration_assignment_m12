@@ -21,15 +21,17 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _getImageList();
   }
+
   @override
   Widget build(BuildContext context) {
-   double screenHeight = MediaQuery.of(context).size.height;
-   double screenWidth = MediaQuery.of(context).size.width;
-    
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: const Text('Photo Gallery App',
+        title: const Text(
+          'Photo Gallery App',
         ),
       ),
       body: RefreshIndicator(
@@ -45,14 +47,18 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: galleryData.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       print('Tapppppppppppp');
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return SingleImageScreen(galleryItem: galleryData[index],);
-
-                      },));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return SingleImageScreen(
+                            galleryItem: galleryData[index],
+                          );
+                        },
+                      ));
                     },
-                    child: _buildProductItem(galleryData[index], screenWidth)); // n(1)
+                    child: _buildProductItem(
+                        galleryData[index], screenWidth)); // n(1)
               },
             ),
           ),
@@ -63,43 +69,43 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildProductItem(GalleryModel gallery, screenWidth) {
     return Container(
-            height: 130,
-            width: screenWidth,
-            margin: const EdgeInsets.symmetric(vertical: 10),
+      height: 130,
+      width: screenWidth,
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 0.5,
+                spreadRadius: 0.5,
+                offset: const Offset(0.5, 1))
+          ]),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 130,
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 0.5,
-                  spreadRadius: 0.5,
-                  offset: const Offset(0.5, 1)
-                )
-              ]
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                    image: NetworkImage(gallery.thumbnailUrl ?? 'Unknown'),
+                    fit: BoxFit.fill)),
+          ),
+          //SizedBox(width: 10),
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text(
+              '${gallery.title}',
+              style: const TextStyle(fontSize: 16),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 130,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(image: NetworkImage(gallery.thumbnailUrl ?? 'Unknown'), fit: BoxFit.fill)
-                  ),
-                ),
-                    //SizedBox(width: 10),
-                Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Text('${gallery.title}',
-                          style: const TextStyle(fontSize: 16),
-                          ),
-                        ))
-              ],
-            ),
-          );
+          ))
+        ],
+      ),
+    );
   }
 
   Future<void> _getImageList() async {
