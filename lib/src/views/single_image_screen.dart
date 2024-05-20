@@ -21,15 +21,13 @@ class _SingleImageScreenState extends State<SingleImageScreen> {
         backgroundColor: Colors.blue,
         title: Text('Album ID: ${widget.galleryItem.albumId ?? 'Unknown'}'),
       ),
-      body: OrientationBuilder(
-          builder: (context, Orientation orientation) {
-            if (orientation == Orientation.portrait){
-              return portraitOrientation(screenWidth, screenHeight);
-            } else {
-              return landscapeOrientation(screenWidth, screenHeight);
-            }
-          }
-      ),
+      body: OrientationBuilder(builder: (context, Orientation orientation) {
+        if (orientation == Orientation.portrait) {
+          return portraitOrientation(screenWidth, screenHeight);
+        } else {
+          return landscapeOrientation(screenWidth, screenHeight);
+        }
+      }),
     );
   }
 
@@ -39,36 +37,39 @@ class _SingleImageScreenState extends State<SingleImageScreen> {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: screenWidth,
-                          height: screenHeight * 0.5,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
-                                    blurRadius: 0.5,
-                                    spreadRadius: 0.5,
-                                    offset: const Offset(0.5, 1)
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(image: NetworkImage(widget.galleryItem.thumbnailUrl.toString()), fit: BoxFit.fill)
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Text(widget.galleryItem.title ?? 'No Title',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        const SizedBox(height: 10),
-                        Text('ID: ${widget.galleryItem.id ?? 'Unknown'}',
-                        style: const TextStyle(fontSize: 20),
-                        ),
-                      ],
-                    ),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: screenWidth,
+                height: screenHeight * 0.5,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 0.5,
+                          spreadRadius: 0.5,
+                          offset: const Offset(0.5, 1))
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            widget.galleryItem.thumbnailUrl.toString()),
+                        fit: BoxFit.fill)),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                widget.galleryItem.title ?? 'No Title',
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'ID: ${widget.galleryItem.id ?? 'Unknown'}',
+                style: const TextStyle(fontSize: 20),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -79,45 +80,47 @@ class _SingleImageScreenState extends State<SingleImageScreen> {
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: screenWidth * 0.5,
-                        height: screenHeight * 0.7,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 0.5,
-                                  spreadRadius: 0.5,
-                                  offset: const Offset(0.5, 1)
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(image: NetworkImage(widget.galleryItem.thumbnailUrl.toString()), fit: BoxFit.fill)
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(widget.galleryItem.title ?? 'No Title',
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(fontSize: 26),
-                            ),
-                            const SizedBox(height: 10),
-                            Text('ID: ${widget.galleryItem.id ?? 'Unknown'}',
-                              style: const TextStyle(fontSize: 20),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                    ],
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: screenWidth * 0.5,
+              height: screenHeight * 0.7,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 0.5,
+                        spreadRadius: 0.5,
+                        offset: const Offset(0.5, 1))
+                  ],
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          widget.galleryItem.thumbnailUrl.toString()),
+                      fit: BoxFit.fill)),
+            ),
+            const SizedBox(width: 20),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.galleryItem.title ?? 'No Title',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 26),
                   ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'ID: ${widget.galleryItem.id ?? 'Unknown'}',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
